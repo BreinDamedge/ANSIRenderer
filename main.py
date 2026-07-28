@@ -1,25 +1,22 @@
-from ansiRenderer import Canvas
-import time
+### non-blocking input with pynput
+
+from pynput import keyboard
 
 
-C = 40
-R = int((3 / 8) * C)
+def on_press(key):
+    try:
+        print("alphanumeric key {0} pressed".format(key.char))
+    except AttributeError:
+        print("special key {0} pressed".format(key))
 
-c = Canvas()
-st = time.time()
-pos: list[int] = [0, 0]
-c.setup()
-vel = 1
 
-while True:
-    c.reset()
-    c.drawRect(*pos, 1, 1, "red")
-    c.ready()
-    c.show()
+def on_release(key):
+    print("{0} released".format(key))
+    if key == keyboard.Key.esc:
+        # Stop listener
+        return False
 
-    pos[0] += vel
-    if pos[0] == (R - 1) or pos[0] == 0:
-        vel *= -1
 
-    # wait for next frame
-    time.sleep(0.5)
+# or, in a non-blocking fashion:
+listener = keyboard.Listener(on_press=on_press, on_release=on_release)
+listener.start()

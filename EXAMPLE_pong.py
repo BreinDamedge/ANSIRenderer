@@ -1,4 +1,4 @@
-from ansiRenderer import Canvas
+from tart import Canvas
 import time
 
 
@@ -12,9 +12,7 @@ c.setup()
 vel = 1
 
 while True:
-    c.reset()
     c.drawRect(*pos, 1, 1, "red")
-    c.clear()
     c.show()
 
     pos[0] += vel

@@ -46,18 +46,18 @@ class Canvas:
         self.frame_chars: list[str] = [" " * self.C] * self.R
         self.frame_codes: list[list[str]] = [[DEFB] * self.C for _ in range(self.R)]
 
-    def shape(self) -> tuple[int, int]:
+    def get_shape(self) -> tuple[int, int]:
         return (self.R, self.C)
 
-    def reset(self) -> None:
+    def _reset_data(self) -> None:
         self.frame_chars = [" " * self.C] * self.R
         self.frame_codes = [[DEFB] * self.C for _ in range(self.R)]
 
     def setup(self) -> None:
         prit(CLEAR_SCREEN)
-        self.ready()
+        self._ready()
 
-    def ready(self) -> None:
+    def _ready(self) -> None:
         prit(HOME)
         prit(DEFAULT)
 
@@ -78,3 +78,5 @@ class Canvas:
                 frame_string += colorChar("default")
             frame_string += "\n"
         prit(frame_string)
+        self._reset_data()
+        self._ready()

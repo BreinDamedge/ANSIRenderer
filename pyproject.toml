@@ -1,7 +1,7 @@
 [project]
-name = "ansirenderer"
+name = "tart"
 version = "0.1.0"
-description = "Add your description here"
+description = "A Python module for terminal art."
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [

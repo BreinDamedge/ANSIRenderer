@@ -1,4 +1,4 @@
-# Ansi Renderer (Paint(erm)?)
+# Ansi Renderer (T-art or Tart, Terminal Art)
 A python module for drawing in the terminal using ansi escape codes
 
 Has pynput as a dependancy now.
