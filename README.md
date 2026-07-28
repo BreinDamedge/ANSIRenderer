@@ -1,16 +1,48 @@
-# Ansi Renderer
-A python module for drawing shapes in the terminal using ansi escape codes
+# Ansi Renderer (Paint(erm)?)
+A python module for drawing in the terminal using ansi escape codes
 
+Has pynput as a dependancy now.
 
 # Ideas/Concepts
-a window will be the main object that you draw in and stuff. It is basically a string with methods.
+A canvas will be the main object.
 
-# Todo:
-- [ ] API Design
 
 # Concepts / Objects
-## Canvas
-## Draw Queue
-## Rectangle
+## Canvas API
+```py
+def reset(self) -> None:
+"""
+"""
 
-So I need a way to to draw objects.
+def setup(self) -> None:
+"""
+"""
+
+def ready(self) -> None:
+"""
+"""
+
+def drawRect(self, r_: float, c_: float, height_: int, width_: int, color_: str) -> None:
+"""
+"""
+
+def show(self) -> None:
+"""
+"""
+
+def shape(self) -> tuple[int, int]:
+"""
+"""
+
+```
+
+
+# Todo:
+- [ ] api
+- [ ] make pong
+- [ ] ...
+- [ ] ...
+- [ ] ...
+- [ ] ...
+- [ ] ...
+

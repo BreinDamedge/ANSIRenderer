@@ -14,7 +14,7 @@ vel = 1
 while True:
     c.reset()
     c.drawRect(*pos, 1, 1, "red")
-    c.ready()
+    c.clear()
     c.show()
 
     pos[0] += vel

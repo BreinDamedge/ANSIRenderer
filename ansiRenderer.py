@@ -37,17 +37,6 @@ DEFB: str = colorChar("black")  # default background for our window
 HOME: str = "\033[H"  # might end in f
 
 
-class Rect:
-    def __init__(self, height_: int, width_: int, r_: float, c_: float) -> None:
-        self.pos: list[float] = [r_, c_]
-        self.shape: list[float] = [height_, width_]
-        self.color: str = colorChar("red")
-
-    def setPos(self, r_: float, c_: float) -> None:
-        self.pos[0] = r_
-        self.pos[1] = c_
-
-
 class Canvas:
     def __init__(self) -> None:
         self.C: int = 40
@@ -57,15 +46,18 @@ class Canvas:
         self.frame_chars: list[str] = [" " * self.C] * self.R
         self.frame_codes: list[list[str]] = [[DEFB] * self.C for _ in range(self.R)]
 
+    def shape(self) -> tuple[int, int]:
+        return (self.R, self.C)
+
     def reset(self) -> None:
         self.frame_chars = [" " * self.C] * self.R
         self.frame_codes = [[DEFB] * self.C for _ in range(self.R)]
 
     def setup(self) -> None:
         prit(CLEAR_SCREEN)
-        self.clear()
+        self.ready()
 
-    def clear(self) -> None:
+    def ready(self) -> None:
         prit(HOME)
         prit(DEFAULT)
 
