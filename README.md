@@ -33,7 +33,6 @@ def shape(self) -> tuple[int, int]:
 
 
 # Todo:
-- [ ] change canvas from rc to xy
 - [ ] support drawing at position outside of the viewport
 - [ ] support drawing with float coords
 - [ ] make pong

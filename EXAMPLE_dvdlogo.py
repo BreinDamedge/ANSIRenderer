@@ -23,9 +23,9 @@ while True:
         # check if we've hit a corner
         if (
             (pos[0] == 0 and pos[1] == 0)
-            or (pos[0] == 0 and pos[1] == c.C - 1)
-            or (pos[0] == c.R - 1 and pos[1] == 0)
-            or (pos[0] == c.R - 1 and pos[1] == c.C - 1)
+            or (pos[0] == 0 and pos[1] == c.WIDTH - 1)
+            or (pos[0] == c.HEIGHT - 1 and pos[1] == 0)
+            or (pos[0] == c.HEIGHT - 1 and pos[1] == c.WIDTH - 1)
         ):
             num_corners += 1
 
@@ -34,9 +34,9 @@ while True:
             pos[i] += vel[i]
 
         # bounce
-        if pos[0] == (c.R - 1) or pos[0] == 0:
+        if pos[0] == (c.WIDTH - 1) or pos[0] == 0:
             vel[0] *= -1
-        if pos[1] == (c.C - 1) or pos[1] == 0:
+        if pos[1] == (c.HEIGHT - 1) or pos[1] == 0:
             vel[1] *= -1
 
         # wait for next frame

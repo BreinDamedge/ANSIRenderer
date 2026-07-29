@@ -12,6 +12,7 @@ class Paddle:
     width: int = 1
     color: str = "white"
 
+    # all this...
     def __getitem__(self, i: int):
         data: dict[str, object] = vars(self)
         keys = iter(data.keys())

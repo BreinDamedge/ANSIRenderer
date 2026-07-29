@@ -39,19 +39,21 @@ HOME: str = "\033[H"  # might end in f
 
 class Canvas:
     def __init__(self) -> None:
-        self.C: int = 40
-        self.R: int = int(
-            (3 / 8) * self.C
+        self.WIDTH: int = 40
+        self.HEIGHT: int = int(
+            (3 / 8) * self.WIDTH
         )  # makes 4:3 aspect ratio (accounts for the cursor being roughly half as wide as it is tall)
-        self.frame_chars: list[str] = [" " * self.C] * self.R
-        self.frame_codes: list[list[str]] = [[DEFB] * self.C for _ in range(self.R)]
+        self.frame_chars: list[str] = [" " * self.WIDTH] * self.HEIGHT
+        self.frame_codes: list[list[str]] = [
+            [DEFB] * self.WIDTH for _ in range(self.HEIGHT)
+        ]
 
     def shape(self) -> tuple[int, int]:
-        return (self.R, self.C)
+        return (self.HEIGHT, self.WIDTH)
 
     def _reset_data(self) -> None:
-        self.frame_chars = [" " * self.C] * self.R
-        self.frame_codes = [[DEFB] * self.C for _ in range(self.R)]
+        self.frame_chars = [" " * self.WIDTH] * self.HEIGHT
+        self.frame_codes = [[DEFB] * self.WIDTH for _ in range(self.HEIGHT)]
 
     def setup(self) -> None:
         prit(CLEAR_SCREEN)
@@ -62,17 +64,17 @@ class Canvas:
         prit(DEFAULT)
 
     def drawRect(
-        self, r_: float, c_: float, height_: int, width_: int, color_: str
+        self, x_pos_: float, y_pos_: float, height_: int, width_: int, color_: str
     ) -> None:
         color_string: str = colorChar(color_)
         for h in range(height_):
             for w in range(width_):
-                self.frame_codes[r_ + h][c_ + w] = color_string
+                self.frame_codes[y_pos_ + h][x_pos_ + w] = color_string
 
     def show(self) -> None:
         frame_string: str = ""
-        for r in range(self.R):
-            for c in range(self.C):
+        for r in range(self.HEIGHT):
+            for c in range(self.WIDTH):
                 frame_string += self.frame_codes[r][c]
                 frame_string += self.frame_chars[r][c]
                 frame_string += colorChar("default")
