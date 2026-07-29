@@ -46,7 +46,7 @@ class Canvas:
         self.frame_chars: list[str] = [" " * self.C] * self.R
         self.frame_codes: list[list[str]] = [[DEFB] * self.C for _ in range(self.R)]
 
-    def get_shape(self) -> tuple[int, int]:
+    def shape(self) -> tuple[int, int]:
         return (self.R, self.C)
 
     def _reset_data(self) -> None:

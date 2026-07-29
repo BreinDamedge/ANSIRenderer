@@ -1,23 +1,42 @@
 from tart import Canvas
+from keys import Keyboard
 import time
+from dataclasses import dataclass
 
 
-C = 40
-R = int((3 / 8) * C)
+@dataclass
+class Paddle:
+    x: int
+    y: int
+    height: int = 4
+    width: int = 1
+    color: str = "white"
+
+    def __getitem__(self, i: int):
+        data: dict[str, object] = vars(self)
+        keys = iter(data.keys())
+        key = next(keys)
+        while i > 0:
+            key = next(keys)
+            i -= 1
+        return data[key]
+
+
+left = Paddle(0, 0)
+
 
 c = Canvas()
-st = time.time()
-pos: list[int] = [0, 0]
+k = Keyboard()
+
+k.begin()
 c.setup()
-vel = 1
-
 while True:
-    c.drawRect(*pos, 1, 1, "red")
-    c.show()
+    # paddle move
+    if k.down("s"):
+        left.y += 1
 
-    pos[0] += vel
-    if pos[0] == (R - 1) or pos[0] == 0:
-        vel *= -1
+    c.drawRect(*left)
+    c.show()
 
     # wait for next frame
     time.sleep(0.5)
