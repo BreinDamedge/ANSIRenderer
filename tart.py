@@ -31,7 +31,7 @@ def colorChar(color_: str, bg_: bool = True) -> str:
 
 
 DEFAULT: str = colorChar("default")
-DEFB: str = colorChar("black")  # default background for our window
+background_color: str = colorChar("black")  # default background for our window
 
 
 def prit(v_: object) -> None:
@@ -51,15 +51,19 @@ class Canvas:
         )  # makes 4:3 aspect ratio (accounts for the cursor being roughly half as wide as it is tall)
         self.frame_chars: list[str] = [" " * self.WIDTH] * self.HEIGHT
         self.frame_codes: list[list[str]] = [
-            [DEFB] * self.WIDTH for _ in range(self.HEIGHT)
+            [background_color] * self.WIDTH for _ in range(self.HEIGHT)
         ]
+
+    def set_background_color(self, color_: str) -> None:
+        global background_color
+        background_color = colorChar(color_)
 
     def shape(self) -> tuple[int, int]:
         return (self.HEIGHT, self.WIDTH)
 
     def _reset_data(self) -> None:
         self.frame_chars = [" " * self.WIDTH] * self.HEIGHT
-        self.frame_codes = [[DEFB] * self.WIDTH for _ in range(self.HEIGHT)]
+        self.frame_codes = [[background_color] * self.WIDTH for _ in range(self.HEIGHT)]
 
     def setup(self) -> None:
         prit(CLEAR_SCREEN)

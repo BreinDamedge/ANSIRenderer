@@ -24,14 +24,14 @@ while True:
         # handle button presses
 
         # duck
-        if k.down("s"):
+        if k.down("s") or k.down("shift"):
             dino.height = DINO_HEIGHT // 2
         else:
             dino.height = DINO_HEIGHT
         dino.y = c.HEIGHT - dino.height
 
         # jump
-        if k.down("w"):
+        if k.down("w") or k.down("space"):
             dino.y = c.HEIGHT - dino.height - JUMP_HEIGHT
 
         # draw the dino

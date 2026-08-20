@@ -16,7 +16,7 @@ timesteps = 0
 
 while True:
     try:
-        print(f"Timestep: {timesteps}, Corner Hits: {num_corners}")
+        # print(f"Timestep: {timesteps}, Corner Hits: {num_corners}")
         c.drawRect(*pos, 1, 1, "red")
         c.show()
 
@@ -41,7 +41,7 @@ while True:
 
         # wait for next frame
         timesteps += 1
-        time.sleep(1 / 60)
+        time.sleep(1 / 15)
 
     except KeyboardInterrupt:
         break

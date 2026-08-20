@@ -33,9 +33,6 @@ def shape(self) -> tuple[int, int]:
 
 
 # Todo:
-- [ ] more key support to keys
-  - [ ] arrows
-  - [ ] space
 - [ ] make pong
   - [x] basic game
   - [ ] decide if you want proper collision
