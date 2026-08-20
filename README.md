@@ -33,10 +33,22 @@ def shape(self) -> tuple[int, int]:
 
 
 # Todo:
-- [ ] support drawing at position outside of the viewport
-- [ ] support drawing with float coords
+- [ ] more key support to keys
+  - [ ] arrows
+  - [ ] space
 - [ ] make pong
-- [ ] ...
+  - [x] basic game
+  - [ ] decide if you want proper collision
+  - [ ] sub pixel positioning asyncronosly from draw loop?
+  - [ ] score tracking
+- [ ] make snake
+  - [x] movement
+    - one physics update per frame
+  - [x] growing the snake
+  - [ ] make fruit
+  - [ ] collision checks
+  - [ ] score
+  - [ ] play again?
 - [ ] ...
 - [ ] ...
 - [ ] ...

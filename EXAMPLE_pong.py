@@ -1,39 +1,36 @@
-from tart import Canvas
+from tart import Canvas, clear_term, Rect
 from keys import Keyboard
 import time
 from dataclasses import dataclass
 import random
 
 
-class convenientToDraw:
-    def __iter__(self) -> object:
-        """overload so you can unpack object into drawRect"""
-        data: dict[str, object] = vars(self)
-        keys = iter(data.keys())
-        for _ in range(5):
-            key = next(keys)
-            yield data[key]
-        return
-
-
 @dataclass
-class Paddle(convenientToDraw):
-    x: int
-    y: int
-    height: int = 4
-    width: int = 1
+class Paddle(Rect):
+    height: float = 4
+    width: float = 1
     color: str = "white"
 
 
 @dataclass
-class Ball(convenientToDraw):
-    x: int = 20 - 1  # should be half way through the screen
-    y: int = int((3 / 8) * 20)
-    height: int = 1
-    width: int = 2
+class Ball(Rect):
+    x: float = 20 - 1  # should be half way through the screen
+    y: float = (3 / 8) * 20
+    height: float = 1
+    width: float = 2
     color: str = "white"
-    vx: int = random.choice([1, -1])
-    vy: int = random.choice([1, -1])
+    vx: float = random.choice([1, -1])
+    vy: float = random.choice([1, -1]) * 0.5
+
+    def speed_up(self) -> None:
+        self.vx *= 1.1
+        self.vy *= 1.1
+
+    def reset(self) -> None:
+        self.x = 20 - 1  # should be half way through the screen
+        self.y = (3 / 8) * 20
+        self.vx = random.choice([1, -1])
+        self.vy = random.choice([1, -1]) * 0.5
 
 
 c = Canvas()
@@ -67,16 +64,23 @@ while True:
         # bounce off top or bottom of screen
         if (b.y + b.vy < 0) or (b.y + b.vy >= c.HEIGHT):
             b.vy *= -1
-        # bounce of left or right of screen
-        # TODO: replace this with paddle collision logic
-        if (b.x + b.vx < 0) or (
-            b.x + b.vx >= c.WIDTH - (b.width - 1)
-        ):  # -1 here bc otherwise it tries to draw off screen
-            b.vx *= -1
 
         # update ball position
         b.y += b.vy
         b.x += b.vx
+
+        hit_left = left.colliding(b.x, b.y, 2, 1)
+        hit_right = right.colliding(b.x, b.y, 2, 1)
+        # paddle collision (to change the ball's velocity for next timestep)
+        if hit_left or hit_right:
+            b.vx *= -1
+            b.speed_up()
+
+        # check if the ball is offscreen
+        if (b.x < 0 and not hit_left) or (b.x >= c.WIDTH and not hit_right):
+            print("point")
+            time.sleep(2)
+            b.reset()
 
         c.drawRect(*left)
         c.drawRect(*right)
@@ -88,4 +92,5 @@ while True:
         k.cleanup()
         time.sleep(0.2)
     except KeyboardInterrupt:
+        clear_term()
         break

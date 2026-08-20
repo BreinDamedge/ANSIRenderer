@@ -83,7 +83,7 @@ class Keyboard:
             if key_state.state or key_state.triggered:
                 out: str = f"{key} :"
                 if key_state.state:
-                    out += f"down, "
+                    out += "down, "
                 if key_state.triggered:
                     out += "triggered, "
                 if not isnan(key_state.hold_start_time):
