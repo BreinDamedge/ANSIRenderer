@@ -127,23 +127,25 @@ class Canvas:
         """construct the frame string from the row column data and then print it"""
         # NOTE: for large Canvas sizes threading this (map reduce on rows?) may speed up construction
         frame_string: str = ""
-        for r in range(Canvas.height):
-            for c in range(Canvas.width):
+        for y in range(Canvas.height):
+            for x in range(Canvas.width):
                 # color code
                 try:
-                    code = Canvas.frame_codes[(r, c)]
+                    code = Canvas.frame_codes[(x, y)]
                 except KeyError:
                     code = Canvas.background_color
                 frame_string += code
                 # character
                 try:
-                    char = Canvas.frame_chars[(r, c)]
+                    char = Canvas.frame_chars[(x, y)]
                 except KeyError:
                     char = " "  # default character is blank
                 frame_string += char
             # reset the color and start the next line
             frame_string += Colors.get_code("default")
             frame_string += "\n"
+
+        frame_string += Colors.get_code("default")
         prit(frame_string)
 
         # reset data & home cursor
