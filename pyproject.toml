@@ -1,7 +1,7 @@
 [project]
-name = "tart"
+name = "artsi"
 version = "0.1.0"
-description = "A Python module for terminal art."
+description = "A Python module for drawing in the terminal with ANSI escape codes."
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
