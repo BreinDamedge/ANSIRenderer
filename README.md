@@ -1,20 +1,34 @@
-# Ansi Renderer (T-art or Tart, Terminal Art)
+# ArtSI | Drawing In The Terminal With ANSI Escape Codes
 A python module for drawing in the terminal using ansi escape codes
 
-Has pynput as a dependancy now.
+ArtSI is purely an interface for drawing in the terminal. The keyboard input wrapper is a seprate thing so it should not be included as a package dependancy when this is published.
+
+# TODO:
+- [x] remove all the keyboard stuff tbh (for now, you can clean it up for use w/digi curriculum if you want)
+- [ ] make artsi documentation
+- [ ] release artsi as a python package on pypy
+  - only the interface for drawing
+
+```py
+if __name__ == "__main__":
+    import time
+
+    Canvas.clear()
+    Canvas.draw_rectangle(0, 0, 3, 4, "red")
+    Canvas.show()
+    time.sleep(10)
+    print("all good")
+```
+
 
 # Ideas/Concepts
 A canvas will be the main object.
 
 
-# Concepts / Objects
+# Concepts
 ## Canvas API
 ```py
 
-
-def setup(self) -> None:
-"""
-"""
 
 
 def drawRect(self, r_: float, c_: float, height_: int, width_: int, color_: str) -> None:
