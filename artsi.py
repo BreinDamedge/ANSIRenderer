@@ -110,7 +110,7 @@ class Canvas:
 
     @staticmethod
     def draw_rectangle(
-        x_: float, y_: float, width_: int, height_: int, color_: str
+        x_: float, y_: float, width_: int, height_: int, color_: str = "red"
     ) -> None:
         """mark frame buffer with codes"""
         color_char: str = Colors.get_code(color_)
@@ -123,7 +123,7 @@ class Canvas:
                     Canvas.frame_codes[(cx, cy)] = color_char
 
     @staticmethod
-    def show() -> None:
+    def show(home_: bool = True) -> None:
         """construct the frame string from the row column data and then print it"""
         # NOTE: for large Canvas sizes threading this (map reduce on rows?) may speed up construction
         frame_string: str = ""
@@ -151,14 +151,68 @@ class Canvas:
         # reset data & home cursor
         Canvas.reset()
         # NOTE: consider adding a parameter that will stop the frame buffer from being deleted/cleared.
-        prit(Special.home())
+        if home_:
+            prit(Special.home())
+
+    @staticmethod
+    def hello_canvas() -> None:
+        """draws a little bouncing rectangle"""
+        import time
+
+        pos: list[int] = [0, 0]
+        vel: list[int] = [1, 1]
+
+        num_corners = 0
+        timesteps = 0
+        FRAME_RATE = 15
+
+        WIDTH, HEIGHT = Canvas.get_shape()
+        Canvas.clear()
+        running = True
+        final_loop = False  # for nice exit print
+        while running:
+            try:
+                print(f"Timestep: {timesteps}, Corner Hits: {num_corners}")
+                Canvas.draw_rectangle(pos[0], pos[1], 1, 1, "red")
+                running = not final_loop
+                Canvas.show(home_=running)
+
+                # check if we've hit a corner
+                if (
+                    (pos[0] == 0 and pos[1] == 0)  # left top
+                    or (pos[0] == 0 and pos[1] == (HEIGHT - 1))  # left bottom
+                    or (pos[0] == (WIDTH - 1) and pos[1] == 0)  # right top
+                    or (
+                        pos[0] == (WIDTH - 1) and pos[1] == (HEIGHT - 1)
+                    )  # right bottom
+                ):
+                    num_corners += 1
+
+                # motion
+                for i in range(len(pos)):
+                    pos[i] += vel[i]
+
+                # bounce
+                if pos[0] == (WIDTH - 1) or pos[0] == 0:
+                    vel[0] *= -1
+                if pos[1] == (HEIGHT - 1) or pos[1] == 0:
+                    vel[1] *= -1
+
+                # wait for next frame
+                timesteps += 1
+                time.sleep(1 / FRAME_RATE)
+
+            except KeyboardInterrupt:
+                final_loop = True
+
+        print(
+            f"Out of {timesteps} timesteps, we hit the corner {num_corners} times, giving us a probability of {num_corners / timesteps}"
+        )
 
 
 if __name__ == "__main__":
-    import time
-
     Canvas.clear()
-    Canvas.draw_rectangle(0, 0, 3, 4, "red")
-    Canvas.show()
-    time.sleep(10)
+    Canvas.draw_rectangle(0, 0, 3, 4)
+    Canvas.show(home_=False)
+    Canvas.hello_canvas()
     print("all good")
