@@ -1,7 +1,21 @@
 [project]
-name = "ansirenderer"
-version = "0.1.0"
-description = "Add your description here"
+name = "artsi"
+version = "0.0.1"
+authors = [
+  { name="Jacob Ableidinger", email="jacobableidinger@gmail.com" },
+]
+description = "A Python module for drawing in the terminal with ANSI escape codes."
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = []
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "CC0"
+license-files = ["LICENSE"]
+
+[project.urls]
+Homepage = "https://github.com/BreinDamedge/ArtSI"
+Issues = "https://github.com/BreinDamedge/ArtSI/issues"
