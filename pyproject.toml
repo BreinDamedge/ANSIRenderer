@@ -1,6 +1,6 @@
 [project]
 name = "artsi"
-version = "0.1.4"
+version = "0.1.6"
 authors = [
   { name="Jacob Ableidinger", email="jacobableidinger@gmail.com" },
 ]
