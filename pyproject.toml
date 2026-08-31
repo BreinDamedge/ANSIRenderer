@@ -1,21 +1,26 @@
 [project]
 name = "artsi"
-version = "0.0.1"
+version = "0.1.6"
 authors = [
   { name="Jacob Ableidinger", email="jacobableidinger@gmail.com" },
 ]
 description = "A Python module for drawing in the terminal with ANSI escape codes."
 readme = "README.md"
-requires-python = ">=3.14"
+requires-python = ">=3.7"
 dependencies = []
 
 classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
 ]
-license = "CC0"
+license = "CC0-1.0"
 license-files = ["LICENSE"]
 
 [project.urls]
 Homepage = "https://github.com/BreinDamedge/ArtSI"
 Issues = "https://github.com/BreinDamedge/ArtSI/issues"
+
+[build-system]
+# not newest hatchling version, but the guide lists this and having older min-reqs is not a bad thing
+requires = ["hatchling >= 1.26"]
+build-backend = "hatchling.build"
