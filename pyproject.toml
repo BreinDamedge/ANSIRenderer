@@ -24,3 +24,11 @@ Issues = "https://github.com/BreinDamedge/ArtSI/issues"
 # not newest hatchling version, but the guide lists this and having older min-reqs is not a bad thing
 requires = ["hatchling >= 1.26"]
 build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+# exclude files from wheel distribution
+exclude = [
+  "/tests",
+  "/img",
+  ".pypirc",
+]
